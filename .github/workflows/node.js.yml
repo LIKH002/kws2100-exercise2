@@ -34,6 +34,8 @@ jobs:
       - run: npm test
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
+        if: matrix. node-version == '22.x'
         with:
           path: ./dist
       - uses: actions/deploy-pages@v4
+        if: matrix. node-version == '22.x'
