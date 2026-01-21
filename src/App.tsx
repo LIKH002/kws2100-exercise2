@@ -1,14 +1,21 @@
 import React from "react";
 
-function ProductCategoryRow({ category }) {
+interface Product {
+  category: string;
+  price: string;
+  stocked: boolean;
+  name: string;
+}
+
+function ProductCategoryRow({ category }: { category: string }) {
   return (
     <tr>
-      <th colSpan="2">{category}</th>
+      <th colSpan={2}>{category}</th>
     </tr>
   );
 }
 
-function ProductRow({ product }) {
+function ProductRow({ product }: { product: Product }) {
   const name = product.stocked ? (
     product.name
   ) : (
@@ -23,9 +30,9 @@ function ProductRow({ product }) {
   );
 }
 
-function ProductTable({ products }) {
-  const rows = [];
-  let lastCategory = null;
+function ProductTable({ products }: { products: Product[] }) {
+  const rows: React.JSX.Element[] = [];
+  let lastCategory: string | null = null;
 
   products.forEach((product) => {
     if (product.category !== lastCategory) {
@@ -64,7 +71,7 @@ function SearchBar() {
   );
 }
 
-function FilterableProductTable({ products }) {
+function FilterableProductTable({ products }: { products: Product[] }) {
   return (
     <div>
       <SearchBar />
@@ -73,7 +80,7 @@ function FilterableProductTable({ products }) {
   );
 }
 
-const PRODUCTS = [
+const PRODUCTS: Product[] = [
   { category: "Fruits", price: "$1", stocked: true, name: "Apple" },
   { category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit" },
   { category: "Fruits", price: "$2", stocked: false, name: "Passionfruit" },
